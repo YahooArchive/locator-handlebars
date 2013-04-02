@@ -4,16 +4,8 @@
     "version": "0.0.1",
     "author": "Caridy Patino <caridy@yahoo-inc.com> (http://github.com/caridy)",
     "contributors": [],
-    "engines": {
-        "node": "0.8.x",
-        "npm": "1.1.x"
-    },
     "dependencies": {
         "yui": "3.9.x"
-    },
-    "devDependencies": {
-        "yuitest": "0.7.x",
-        "ytestrunner": "0.3.x"
     },
     "main": "index",
     "keywords": [
@@ -24,7 +16,25 @@
         "handlebars",
         "templates"
     ],
+    "directories": {
+        "lib": "./lib"
+    },
+    "engines": {
+        "node": ">0.8",
+        "npm": ">1.0"
+    },
+    "homepage": "yo/modown",
+    "devDependencies": {
+        "chai": "*",
+        "istanbul": "*",
+        "jslint": "*",
+        "mocha": "*",
+        "mockery": "1.4.x",
+        "xunit-file": "*"
+    },
     "scripts": {
-        "test": "./node_modules/ytestrunner/lib/cli.js -c --include tests/units/**/*.js"
-    }
+        "cover": "./node_modules/istanbul/lib/cli.js cover -- ./node_modules/mocha/bin/_mocha tests/lib/*.js --reporter spec",
+        "test": "./node_modules/.bin/jslint lib/*.js tests/lib/*.js && ./node_modules/.bin/_mocha tests/lib/*.js --reporter spec"
+    },
+    "license": "BSD"
 }

@@ -1,0 +1,4 @@
+tests
+*.log
+artifacts
+coverage
