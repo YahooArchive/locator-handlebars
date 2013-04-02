@@ -1,0 +1,30 @@
+{
+    "name": "modown-handlebars",
+    "description": "Modown Handlebars Component",
+    "version": "0.0.1",
+    "author": "Caridy Patino <caridy@yahoo-inc.com> (http://github.com/caridy)",
+    "contributors": [],
+    "engines": {
+        "node": "0.8.x",
+        "npm": "1.1.x"
+    },
+    "dependencies": {
+        "yui": "3.9.x"
+    },
+    "devDependencies": {
+        "yuitest": "0.7.x",
+        "ytestrunner": "0.3.x"
+    },
+    "main": "index",
+    "keywords": [
+        "framework",
+        "yui",
+        "mojito",
+        "modown",
+        "handlebars",
+        "templates"
+    ],
+    "scripts": {
+        "test": "./node_modules/ytestrunner/lib/cli.js -c --include tests/units/**/*.js"
+    }
+}
