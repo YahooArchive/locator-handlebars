@@ -1,3 +1,7 @@
+var plugin = require('./lib/plugin');
+
 module.exports = {
-    plugin: require('./lib/plugin')
+    plugin: function () {
+        return plugin;
+    }
 };
