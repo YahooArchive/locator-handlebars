@@ -5,7 +5,7 @@
     "author": "Caridy Patino <caridy@yahoo-inc.com> (http://github.com/caridy)",
     "contributors": [],
     "dependencies": {
-        "yui": "3.9.x"
+        "yui": "3.x"
     },
     "main": "index",
     "keywords": [
