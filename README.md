@@ -1,4 +1,4 @@
-modown-handlebars
-=================
+locator-handlebars
+==================
 
-locator plugin for handlebars templates
+handlebars template compiler for locator

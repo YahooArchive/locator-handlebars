@@ -1,6 +1,6 @@
 {
-    "name": "modown-handlebars",
-    "description": "Modown Handlebars Component",
+    "name": "locator-handlebars",
+    "description": "Handlebars template compiler for locator",
     "version": "0.0.1",
     "author": "Caridy Patino <caridy@yahoo-inc.com> (http://github.com/caridy)",
     "contributors": [],
@@ -33,8 +33,8 @@
         "xunit-file": "*"
     },
     "scripts": {
-        "cover": "./node_modules/istanbul/lib/cli.js cover -- ./node_modules/mocha/bin/_mocha tests/lib/*.js --reporter spec",
-        "test": "./node_modules/.bin/jslint lib/*.js tests/lib/*.js && ./node_modules/.bin/_mocha tests/lib/*.js --reporter spec"
+        "lint": "node node_modules/.bin/jslint lib/*.js",
+        "test": "node node_modules/.bin/_mocha tests/lib/*.js --reporter spec"
     },
     "license": "BSD"
 }
