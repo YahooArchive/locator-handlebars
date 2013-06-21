@@ -1,11 +1,11 @@
 {
     "name": "locator-handlebars",
     "description": "Handlebars template compiler for locator",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "author": "Caridy Patino <caridy@yahoo-inc.com> (http://github.com/caridy)",
     "contributors": [],
     "dependencies": {
-        "yui": "3.x"
+        "yui": "~3.10.1"
     },
     "main": "index",
     "keywords": [
