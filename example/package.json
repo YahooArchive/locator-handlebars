@@ -1,0 +1,14 @@
+{
+    "name": "demo",
+    "description": "Locator Handlebars Demo.",
+    "version": "0.0.1",
+    "private": true,
+    "main": "app.js",
+    "devDependencies": {
+        "express": "*",
+        "express-yui": "*",
+        "locator": "*",
+        "locator-handlebars": "*",
+        "yui": "~3.10.1"
+    }
+}

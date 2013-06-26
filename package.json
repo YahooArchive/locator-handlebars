@@ -20,8 +20,8 @@
         "lib": "./lib"
     },
     "engines": {
-        "node": ">0.8",
-        "npm": ">1.0"
+        "node": ">=0.8.x",
+        "npm" : ">=1.2.10"
     },
     "homepage": "yo/modown",
     "devDependencies": {
@@ -35,6 +35,13 @@
     "scripts": {
         "lint": "node node_modules/.bin/jslint lib/*.js",
         "test": "node node_modules/.bin/_mocha tests/lib/*.js --reporter spec"
+    },
+    "repository": {
+        "type": "git",
+        "url" : "https://github.com/yahoo/locator-handlebars.git"
+    },
+    "bugs": {
+        "url": "https://github.com/yahoo/locator-handlebars/issues"
     },
     "license": "BSD"
 }

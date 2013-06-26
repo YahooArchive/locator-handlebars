@@ -2,3 +2,5 @@ node_modules
 *.log
 artifacts
 coverage
+example/node_modules/*
+example/build/*
