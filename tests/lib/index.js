@@ -22,7 +22,7 @@ describe('plugin', function () {
 
         // we nee to write some tests here!
         it('partialDir', function () {
-            expect(plugin.describe.partialDir).to.equal('partials');
+            expect(plugin.describe.partialDir).to.equal('./partials');
         });
 
     });

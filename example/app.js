@@ -9,6 +9,7 @@ var express = require('express'),
     app = express();
 
 app.yui.debugMode();
+app.yui.setCoreFromAppOrigin();
 
 // custom view engine to rely on yui templates
 app.set('view', app.yui.view({
@@ -21,7 +22,7 @@ app.use(YUI['static']());
 
 // creating a page with YUI embeded
 app.get('/', YUI.expose(), function (req, res, next) {
-    res.render('templates/bar', {
+    res.render('bar', {
         tagline: 'testing with some data for template bar at the server side',
         bundle: 'demo',
         layout: 'layout'

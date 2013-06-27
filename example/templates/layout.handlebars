@@ -16,16 +16,20 @@
 
     <div id="barclient">{{{outlet}}}</div>
 
+    <h1>partial `baz` rendered at the server side: </h1>
+
+    <div id="barclient">{{>baz}}</div>
+
     <script>{{{state}}}</script>
     <script>
     // this is the code to be executed in the client side to
     // boot the application.
     app.yui.use('node', 'demo-templates-bar', function (Y) {
-        var fooContent = Y.Template._cache['demo-templates-bar']({
+        var fooContent = Y.Template._cache['demo/bar']({
             tagline: 'bar template rendered from client side',
             bundle: 'demo'
         });
-        Y.one('#foo').setContent(fooContent);
+        Y.one('#barclient').setContent(fooContent);
     });
     </script>
 
