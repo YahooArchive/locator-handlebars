@@ -69,6 +69,12 @@ In the example above, the `<name-of-app>` is the name specified in the `package.
 _note: in the near future, `Y.Template.render()` will be the formal API instead of using the `_cache` object, which is protected._
 
 
+TODO
+----
+
+* Add `helpers` rehydration.
+
+
 License
 -------
 
