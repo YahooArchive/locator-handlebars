@@ -46,5 +46,6 @@ new Locator({
         });
 
     }, function (err) {
-        throw err;
+        console.error(err);
+        console.error(err.stack);
     });
