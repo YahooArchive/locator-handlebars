@@ -2,5 +2,5 @@ tests
 *.log
 artifacts
 coverage
-example/*
-tests/*
+example
+tests
