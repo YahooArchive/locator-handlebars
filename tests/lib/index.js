@@ -18,7 +18,6 @@ var libpath = require('path'),
     core = require('../../lib/core.js'),
     plugin = require('../../lib/plugin.js'),
     libpromise  = require('yui/promise'),
-    liblocator = require('locator'),
     fixturesPath = libpath.join(__dirname, '../fixtures');
 
 describe('locator-handlebars', function () {
