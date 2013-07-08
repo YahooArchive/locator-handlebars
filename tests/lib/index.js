@@ -34,17 +34,27 @@ describe('locator-handlebars', function () {
     describe('core', function () {
 
         it('isPartial', function () {
-            var result = core.isPartial("../../lib", "../..");
+            var result = core.isPartial("../fixtures/testfile.hb", "../fixtures");
+            expect(result).to.equal(true);
+        });
+        
+        it('isPartial1', function () {
+            var result = core.isPartial("../fixtures", "../");
             expect(result).to.equal(true);
         });
 
+        it('isPartialnegative', function () {
+            var result = core.isPartial("../fixtures/", "../fixtures");
+            expect(result).to.equal(false);
+        });
+        
         it('isPartialnegative1', function () {
-            var result = core.isPartial("../../lib", "../../lib");
+            var result = core.isPartial("../fixtures/testfile.hb", "../fixtures/testfile.hb");
             expect(result).to.equal(false);
         });
 
         it('isPartialnegative2', function () {
-            var result = core.isPartial("../../lib", "../../lib/core.js");
+            var result = core.isPartial("../fixtures", "../../fixtures/testfile.hb");
             expect(result).to.equal(false);
         });
 
@@ -53,10 +63,15 @@ describe('locator-handlebars', function () {
             expect(result[0]).to.equal('baz');
             expect(result[1]).to.equal('abcd');
         });
+        
+        it('partialsdefault', function () {
+            var result = core.partials(fixturesPath + '/testfile.hbs');
+            expect(result.length).to.equal(0);
+        });
 
         it('compile', function () {
             var result = core.compile(fixturesPath + '/testfile.hb');
-            expect(JSON.stringify(result).substring(1, 51)).to.equal('function (Handlebars,depth0,helpers,partials,data)');
+            expect(JSON.stringify(result).substring(1, 9)).to.equal('function');
         });
     });
 
