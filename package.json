@@ -32,7 +32,8 @@
         "yui-lint": "~0.1.3",
         "mocha": "*",
         "mockery": "1.4.x",
-        "xunit-file": "*"
+        "xunit-file": "*",
+        "locator": "*"
     },
     "scripts": {
         "lint": "node node_modules/.bin/jshint --config ./node_modules/yui-lint/jshint.json ./lib/*.js",

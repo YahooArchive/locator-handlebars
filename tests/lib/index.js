@@ -18,27 +18,44 @@ var libpath = require('path'),
     core = require('../../lib/core.js'),
     plugin = require('../../lib/plugin.js'),
     libpromise  = require('yui/promise'),
+    Locator = require('locator'),
     fixturesPath = libpath.join(__dirname, '../fixtures');
 
 describe('locator-handlebars', function () {
 
     describe('plugin', function () {
 
-        // we nee to write some tests here!
         it('partialDir', function () {
             expect(plugin.describe.partialDir).to.equal('./partials');
         });
 
+        it('fileUpdated', function (next) {
+            var locator = new Locator({});
+            locator.plug(plugin).parseBundle(libpath.join(fixturesPath, 'testapp'), {}).then(function () {
+                libfs.exists(libpath.join(fixturesPath, 'testapp/testapp-templates-testfile.js'), function (exists) {
+                    expect(exists).to.equal(true);
+                });
+                libfs.exists(libpath.join(fixturesPath, 'testapp/testapp-partials-testfile.js'), function (exists) {
+                    expect(exists).to.equal(true);
+                });
+                next();
+            }, next);
+        });
     });
 
     describe('core', function () {
 
         it('isPartial', function () {
+            var result = core.isPartial("../fixtures/partials/testfile.hb", "../fixtures/partials");
+            expect(result).to.equal(true);
+        });
+
+        it('isPartial1', function () {
             var result = core.isPartial("../fixtures/testfile.hb", "../fixtures");
             expect(result).to.equal(true);
         });
-        
-        it('isPartial1', function () {
+
+        it('isPartial2', function () {
             var result = core.isPartial("../fixtures", "../");
             expect(result).to.equal(true);
         });
@@ -47,7 +64,7 @@ describe('locator-handlebars', function () {
             var result = core.isPartial("../fixtures/", "../fixtures");
             expect(result).to.equal(false);
         });
-        
+
         it('isPartialnegative1', function () {
             var result = core.isPartial("../fixtures/testfile.hb", "../fixtures/testfile.hb");
             expect(result).to.equal(false);
@@ -63,7 +80,7 @@ describe('locator-handlebars', function () {
             expect(result[0]).to.equal('baz');
             expect(result[1]).to.equal('abcd');
         });
-        
+
         it('partialsdefault', function () {
             var result = core.partials(fixturesPath + '/testfile.hbs');
             expect(result.length).to.equal(0);
