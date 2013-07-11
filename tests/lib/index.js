@@ -50,7 +50,7 @@ describe('locator-handlebars', function () {
             expect(result).to.equal(true);
         });
 
-        it('isPartialnegative1', function () {
+        it('isPartialnegative', function () {
             var result = core.isPartial("../fixtures/testfile.hb", "fixtures/abc/ ");
             expect(result).to.equal(false);
         });
