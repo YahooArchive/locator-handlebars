@@ -7,7 +7,7 @@ Handlebars template compiler for locator.
 
 This component is a result of the integration between [YUI][] and [Locator][] component from Yahoo! to compile [Handlebars][]' templates into [YUI][] Modules that could be used on the server thru express and on the client thru [YAF][].
 
-The beaufy of this is that you will NOT need to download the full `handlebars` parser component or the template itself, instead you use YUI Loader to load modules that will provision the handlebars templates in a form of javascript functions ready to be execute to produce a html fragment.
+The beauty of this is that you will NOT need to download the full `handlebars` parser component or the template itself, instead you use YUI Loader to load modules that will provision the handlebars templates in a form of javascript functions ready to be execute to produce a html fragment.
 
 [Handlebars]: http://handlebarsjs.com/
 [Locator]: https://github.com/yahoo/locator
@@ -59,17 +59,51 @@ On the client side, any [Handlebars][] template will be accessible as well thru 
 ```
 app.yui.use('<name-of-app>-templates-bar', function (Y) {
 
-    Y.Template._cache['<name-of-app>/bar']({
+    var html = Y.Template._cache['<name-of-app>/bar']({
         tagline: 'testing with some data for template bar'
-    }, Y.one('#container'));
+    });
 
 });
 ```
 
-In the example above, the `<name-of-app>` is the name specified in the `package.json` for your express application, and the template `bar.handlebars` will be rendered under the `#container` selector.
+In the example above, the `<name-of-app>` is the name specified in the `package.json` for your express application, and the template `bar.handlebars` will be rendered producing a HTML fragment.
 
 _note: in the near future, `Y.Template.render()` will be the formal API instead of using the `_cache` object, which is protected._
 
+
+Partials
+--------
+
+This component will support handlebars partials, but there are few caveats:
+
+* By default, any handlebars template under a folder called `partials` will be consider a partial.
+
+* The name of the folder to identify partials could be customized when you plug the plugin into locator.
+
+* Partials can be rendered as regular templates as well but the naming convention is slightly different.
+
+* Partials can be used in regular templates and within another partials as well, and `locator-handlebars` will provision them automatically thru YUI Loader.
+
+If you need to use a different folder name, you can customize it like this:
+
+```
+// using locator-handlebars yui plugin
+loc.plug(LocatorHandlebars.yui({
+    partialsDirname: 'my-partials'
+}));
+```
+
+Here is an example of a compiled partial:
+
+```
+app.yui.use('<name-of-app>-partials-foo', function (Y) {
+
+    var html = Y.Template._cache['<name-of-app>/foo']({
+        title: 'data to render the partial'
+    });
+
+});
+```
 
 TODO
 ----

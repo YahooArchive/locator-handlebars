@@ -21,8 +21,8 @@ describe('plugin', function () {
     describe('instance', function () {
 
         // we nee to write some tests here!
-        it('partialDir', function () {
-            expect(plugin.describe.partialDir).to.equal('./partials');
+        it('partialsDirname', function () {
+            expect(plugin.describe.partialsDirname).to.equal('partials');
         });
 
     });
