@@ -21,8 +21,8 @@ describe('plugin', function () {
     describe('instance', function () {
 
         // we nee to write some tests here!
-        it('partialsDirname', function () {
-            expect(plugin.describe.partialsDirname).to.equal('partials');
+        it('summary', function () {
+            expect(plugin.describe.summary).to.equal('Compile handlebars templates to yui modules');
         });
 
     });
