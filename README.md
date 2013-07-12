@@ -57,16 +57,16 @@ https://github.com/yahoo/locator-handlebars/tree/master/example
 On the client side, any [Handlebars][] template will be accessible as well thru `yui` as a regular yui module. Here is an example:
 
 ```
-app.yui.use('<name-of-app>-templates-bar', function (Y) {
+app.yui.use('<package-name>-templates-bar', function (Y) {
 
-    var html = Y.Template._cache['<name-of-app>/bar']({
+    var html = Y.Template._cache['<package-name>/bar']({
         tagline: 'testing with some data for template bar'
     });
 
 });
 ```
 
-In the example above, the `<name-of-app>` is the name specified in the `package.json` for your express application, and the template `bar.handlebars` will be rendered producing a HTML fragment.
+In the example above, the `<package-name>` is the package name specified in the `package.json` for the npm package that contains the template, which is usually the express application. `bar` comes from `bar.handlebars` where the filename is used as the name to register the template under `Y.Template`. By using the yui module name, you will be able to invoke the render action to produce a html fragment.
 
 _note: in the near future, `Y.Template.render()` will be the formal API instead of using the `_cache` object, which is protected._
 
@@ -74,36 +74,31 @@ _note: in the near future, `Y.Template.render()` will be the formal API instead 
 Partials
 --------
 
-This component will support handlebars partials, but there are few caveats:
+This component will support handlebars partials:
 
-* By default, any handlebars template under a folder called `partials` will be consider a partial.
+* A partial is just another template.
 
-* The name of the folder to identify partials could be customized when you plug the plugin into locator.
+* If a template uses another template (in a form of partial) it will be added to the dependency tree and will be loaded automatically.
 
-* Partials can be rendered as regular templates as well but the naming convention is slightly different.
+* The name used to register the template under `Y.Template` is based on the filename by default, but could be customized to avoid collisions.
 
-* Partials can be used in regular templates and within another partials as well, and `locator-handlebars` will provision them automatically thru YUI Loader.
-
-If you need to use a different folder name, you can customize it like this:
+If you want to use a different template name, you can write your own parser:
 
 ```
 // using locator-handlebars yui plugin
 loc.plug(LocatorHandlebars.yui({
-    partialsDirname: 'my-partials'
+    nameParser: function (source_path) {
+        var libpath = require('path'),
+            name = libpath.basename(source_path, libpath.extname(source_path));
+        if (source_path.indexOf('partials') > 0) {
+            name += '-partial';
+        }
+        return name;
+    }
 }));
 ```
 
-Here is an example of a compiled partial:
-
-```
-app.yui.use('<name-of-app>-partials-foo', function (Y) {
-
-    var html = Y.Template._cache['<name-of-app>/foo']({
-        title: 'data to render the partial'
-    });
-
-});
-```
+In the example above, when trying to parse `/path/to/foo.hbs` it will return `foo`, but when trying to `/path/to/partials/bar.hbs` it will return `foo-partial`, that will avoid collisions while giving you full control over the name resolution for the compiled templates.
 
 TODO
 ----
