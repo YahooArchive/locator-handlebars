@@ -15,6 +15,7 @@ var libpath = require('path'),
     mockery = require('mockery'),
     expect = require('chai').expect,
     assert = require('chai').assert,
+    index = require('../../lib/index.js'),
     core = require('../../lib/core.js'),
     plugin = require('../../lib/plugin.js'),
     libpromise  = require('yui/promise'),
@@ -23,10 +24,32 @@ var libpath = require('path'),
 
 describe('locator-handlebars', function () {
 
+    describe('index', function () {
+
+        it('extend', function () {
+            var a = { 
+                    foo: 'bar',
+                    extensions: 'baz',
+                    nameParser: 'test'
+                },
+                extended = index.yui(a);
+            expect(extended.describe.summary).to.equal('Compile handlebars templates to yui modules');
+            expect(extended.describe.extensions).to.equal('baz');
+            expect(extended.describe.nameParser).to.equal('test');
+            expect(extended.describe.foo).to.equal('bar');
+        });
+        
+        it('extend1', function () {
+            var extended = index.yui();
+            expect(extended.describe.summary).to.equal('Compile handlebars templates to yui modules');
+        });
+
+    });
+
     describe('plugin', function () {
 
-        it('partialDir', function () {
-            expect(plugin.describe.partialDir).to.equal('./partials');
+        it('summary', function () {
+            expect(plugin.describe.summary).to.equal('Compile handlebars templates to yui modules');
         });
 
         it('fileUpdated', function (next) {
@@ -35,7 +58,7 @@ describe('locator-handlebars', function () {
                 libfs.exists(libpath.join(fixturesPath, 'testapp/testapp-templates-testfile.js'), function (exists) {
                     expect(exists).to.equal(true);
                 });
-                libfs.exists(libpath.join(fixturesPath, 'testapp/testapp-partials-testpartial.js'), function (exists) {
+                libfs.exists(libpath.join(fixturesPath, 'testapp/testapp-templates-testpartial.js'), function (exists) {
                     expect(exists).to.equal(true);
                 });
                 next();
@@ -44,16 +67,6 @@ describe('locator-handlebars', function () {
     });
 
     describe('core', function () {
-
-        it('isPartial', function () {
-            var result = core.isPartial("../fixtures/partials/testpartial.hbs", "fixtures/partials");
-            expect(result).to.equal(true);
-        });
-
-        it('isPartialnegative', function () {
-            var result = core.isPartial("../fixtures/testfile.hb", "fixtures/abc/ ");
-            expect(result).to.equal(false);
-        });
 
         it('partials', function () {
             var result = core.partials(fixturesPath + '/testfile.handlebars');
