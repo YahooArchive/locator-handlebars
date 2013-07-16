@@ -1,7 +1,1 @@
-var plugin = require('./lib/plugin');
-
-module.exports = {
-    yui: function () {
-        return plugin;
-    }
-};
+module.exports = require('./lib/');
