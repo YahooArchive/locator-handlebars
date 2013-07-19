@@ -13,7 +13,6 @@
 var libpath = require('path'),
     expect = require('chai').expect,
     core = require('../../lib/core.js'),
-    libpromise  = require('yui/promise'),
     fixturesPath = libpath.join(__dirname, '../fixtures');
 
 describe('locator-handlebars', function () {

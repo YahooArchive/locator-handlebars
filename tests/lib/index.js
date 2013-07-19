@@ -11,8 +11,7 @@
 
 
 var expect = require('chai').expect,
-    index = require('../../lib/index.js'),
-    libpromise  = require('yui/promise');
+    index = require('../../lib/index.js');
     
 describe('locator-handlebars', function () {
 
@@ -31,7 +30,7 @@ describe('locator-handlebars', function () {
             expect(extended.describe.foo).to.equal('bar');
         });
 
-        it('extend1', function () {
+        it('extend default instance', function () {
             var extended = index.yui();
             expect(extended.describe.summary).to.equal('Compile handlebars templates to yui modules');
         });

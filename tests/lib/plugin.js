@@ -30,11 +30,11 @@ describe('locator-handlebars', function () {
                 evt = { file: file, bundle: bundle },
                 api = {},
                 filecall = 0;
-            file.fullPath = libpath.join(__dirname, '../fixtures/testapp/testfile.handlebars');
+            file.fullPath = libpath.join(__dirname, '../fixtures/testfile.handlebars');
             api.promise = function (fn) {
                 return new libpromise.Promise(fn);
             };
-            file.fullPath = libpath.join(__dirname, '../fixtures/testapp/testfile.handlebars');
+            file.fullPath = libpath.join(__dirname, '../fixtures/testfile.handlebars');
             api.writeFileInBundle =  function (bundleName, relativePath, contents, options) {
                 filecall += 1;
                 expect(bundleName).to.equal("testing");
@@ -55,13 +55,13 @@ describe('locator-handlebars', function () {
             }, next);
         });
 
-        it('fileUpdated1', function (next) {
+        it('fileUpdated if file not exists', function (next) {
             var file = { bundleName: 'testing' },
                 bundle = { name: 'testing' },
                 evt = { file: file, bundle: bundle },
                 api = {},
                 filecall = 0;
-            file.fullPath = libpath.join(__dirname, '../fixtures/testapp/testnofile.handlebars');
+            file.fullPath = libpath.join(__dirname, '../fixtures/testnofile.handlebars');
             api.promise = function (fn) {
                 return new libpromise.Promise(fn);
             };
