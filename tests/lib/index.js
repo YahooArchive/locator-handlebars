@@ -10,19 +10,29 @@
 "use strict";
 
 
-var libpath = require('path'),
-    libfs = require('fs'),
-    mockery = require('mockery'),
-    expect = require('chai').expect,
-    plugin = require('../../lib/plugin.js');
+var expect = require('chai').expect,
+    index = require('../../lib/index.js');
+    
+describe('locator-handlebars', function () {
 
-describe('plugin', function () {
+    describe('index', function () {
 
-    describe('instance', function () {
+        it('extend', function () {
+            var a = {
+                foo: 'bar',
+                extensions: 'baz',
+                nameParser: 'test'
+            },
+                extended = index.yui(a);
+            expect(extended.describe.summary).to.equal('Compile handlebars templates to yui modules');
+            expect(extended.describe.extensions).to.equal('baz');
+            expect(extended.describe.nameParser).to.equal('test');
+            expect(extended.describe.foo).to.equal('bar');
+        });
 
-        // we nee to write some tests here!
-        it('summary', function () {
-            expect(plugin.describe.summary).to.equal('Compile handlebars templates to yui modules');
+        it('extend default instance', function () {
+            var extended = index.yui();
+            expect(extended.describe.summary).to.equal('Compile handlebars templates to yui modules');
         });
 
     });
