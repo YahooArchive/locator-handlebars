@@ -1,6 +1,10 @@
 Locator Handlebars Change History
 =================================
 
+0.2.1 (2013-07-22)
+
+* yui is now locked down to 3.11.0
+
 0.2.0 (2013-07-16)
 ------------------
 
