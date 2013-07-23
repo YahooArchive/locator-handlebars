@@ -9,6 +9,6 @@
         "express-yui": "*",
         "locator": "*",
         "locator-handlebars": "*",
-        "yui": "~3.10.1"
+        "yui": "~3.11.0"
     }
 }
