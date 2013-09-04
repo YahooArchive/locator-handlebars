@@ -4,11 +4,9 @@
     "version": "0.0.1",
     "private": true,
     "main": "app.js",
-    "devDependencies": {
+    "dependencies": {
         "express": "*",
         "express-yui": "*",
-        "locator": "*",
-        "locator-handlebars": "*",
-        "yui": "~3.11.0"
+        "locator": "*"
     }
 }

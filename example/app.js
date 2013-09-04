@@ -5,10 +5,11 @@
 var express = require('express'),
     YUI = require('express-yui'),
     Locator = require('locator'),
-    LocatorHandlebars = require('locator-handlebars'),
+    LocatorHandlebars = require('../'),
     app = express();
 
-app.yui.debugMode();
+YUI.extend(app);
+YUI.debug();
 app.yui.setCoreFromAppOrigin();
 
 // custom view engine to rely on yui templates
