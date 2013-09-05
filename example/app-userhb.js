@@ -6,11 +6,22 @@ var express = require('express'),
     YUI = require('express-yui'),
     Locator = require('locator'),
     LocatorHandlebars = require('locator-handlebars'),
-    handlebars = require('handlebars'), // wycats's handlebars
+    handlebars = require('handlebars'), // let's use wycats's handlebars
     app = express();
 
 YUI.extend(app);
 app.yui.setCoreFromAppOrigin();
+
+app.yui.applyGroupConfig({ // FIXME does not override yui's handlebars-base
+    'handlebars-base': {
+        async: false,
+        modules: {
+            'handlebars-base': {
+                fullpath: __dirname + '/node_modules/handlebars'
+            }
+        }
+    }
+});
 
 // custom view engine to rely on yui templates
 app.set('view', app.yui.view({
@@ -32,16 +43,21 @@ app.get('/', YUI.expose(), function (req, res, next) {
 
 // locator initialiation
 new Locator({
-    buildDirectory: 'build'
-})
+        buildDirectory: 'build'
+    })
+
     .plug(LocatorHandlebars.yui({
         handlebars: handlebars // wycats's handlebars, not yui/handlebars
     }))
+
     .plug(app.yui.plugin({
         registerGroup: true,
         registerServerModules: true
     }))
-    .parseBundle(__dirname, {}).then(function () {
+
+    .parseBundle(__dirname, {})
+
+    .then(function () {
 
         // listening for traffic only after locator finishes the walking process
         app.listen(3000, function () {
