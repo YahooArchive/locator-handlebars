@@ -8,7 +8,7 @@ var express = require('express'),
     LocatorHandlebars = require('locator-handlebars'),
     app = express();
 
-app.yui.debugMode();
+YUI.extend(app);
 app.yui.setCoreFromAppOrigin();
 
 // custom view engine to rely on yui templates
@@ -42,7 +42,7 @@ new Locator({
 
         // listening for traffic only after locator finishes the walking process
         app.listen(3000, function () {
-            console.log("Server listening on port 3000");
+            console.log('Server listening on port 3000');
         });
 
     }, function (err) {
