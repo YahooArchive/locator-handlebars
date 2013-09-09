@@ -54,6 +54,25 @@ describe('locator-handlebars', function () {
             expect(actual).to.equal(expected);
         });
 
+        it('extensions option default', function () {
+            var extended = index.yui(),
+
+                expected = ['hb', 'handlebars', 'hbs'],
+                actual = extended.describe.extensions;
+
+            expect(actual).to.have.members(expected);
+            expect(actual.length).to.equal(expected.length)
+        });
+
+        it('extensions option custom', function () {
+            var extended = index.yui({extensions: ['hb', 'handlebars', 'hbs', 'handleb']}),
+
+                expected = ['hb', 'handlebars', 'hbs', 'handleb'],
+                actual = extended.describe.extensions;
+
+            expect(actual).to.have.members(expected);
+            expect(actual.length).to.equal(expected.length)
+        });
     });
 
 });
