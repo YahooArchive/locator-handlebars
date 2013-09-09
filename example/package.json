@@ -7,7 +7,6 @@
     "dependencies": {
         "express": "*",
         "express-yui": "*",
-        "handlebars": "*",
         "locator": "*",
         "locator-handlebars": "*",
         "yui": "~3.11.0"
