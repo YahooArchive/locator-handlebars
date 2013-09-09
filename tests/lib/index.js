@@ -38,10 +38,10 @@ describe('locator-handlebars', function () {
         it('YUI/handlebars applied to index.yui().handlebars by default', function () {
             var extended = index.yui(),
 
-                expected = '1.0.0-yui',
-                actual = extended.describe.handlebars.VERSION;
+                expected = require('yui/handlebars').Handlebars,
+                actual = extended.describe.handlebars;
 
-            expect(actual.slice(-4)).to.equal(expected.slice(-4));
+            expect(actual).is.equal(expected);
         });
 
         it('custom handlebars is used in extended instance', function () {
