@@ -46,6 +46,15 @@ loc.plug(LocatorHandlebars.yui());
 loc.parseBundle(__dirname, {});
 ```
 
+#### Options
+
+An options configuration object may be passed to the locator-handlebars plugin creation function `LocatorHandlebars.yui(options)`.
+
+Properties that may be used include:
+- `extensions` - array of string filename extensions to use to identify Handlebars template files. The default is `['hb', 'handlebars', 'hbs']`.
+- `handlebars` - instance of handlebars to use server-side. Default is `require('yui/handlebars').Handlebars`.
+
+
 ### Server side with `express` and `express-yui`
 
 You can try a working example here:
