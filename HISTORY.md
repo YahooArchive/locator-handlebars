@@ -1,6 +1,10 @@
 Locator Handlebars Change History
 =================================
 
+0.2.3 (2013-09-16)
+
+* relaxing the yui dependency to support 3.x.
+
 0.2.2 (2013-09-12)
 
 * a handlebars instance may be passed to locator-handlebars in the "handlebars" property of it's options object, and it will be used for server-side compilation and rendering instead of YUI Handlebars.
