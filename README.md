@@ -66,7 +66,7 @@ https://github.com/yahoo/locator-handlebars/tree/master/example
 On the client side, any [Handlebars][] template will be accessible as well thru `yui` as a regular yui module. Here is an example:
 
 ```
-app.yui.use('<package-name>-templates-bar', function (Y) {
+app.yui.use('<package-name>-template-bar', function (Y) {
 
     var html = Y.Template._cache['<package-name>/bar']({
         tagline: 'testing with some data for template bar'

@@ -10,7 +10,8 @@
 "use strict";
 
 
-var libpath = require('path'),
+var libfs = require('fs'),
+    libpath = require('path'),
     expect = require('chai').expect,
     core = require('../../lib/core.js'),
     HB = require('yui/handlebars').Handlebars,
@@ -21,19 +22,16 @@ describe('locator-handlebars', function () {
     describe('core', function () {
 
         it('partials', function () {
-            var result = core.partials(fixturesPath + '/testfile.handlebars', HB);
+            var source = libfs.readFileSync(fixturesPath + '/testfile.handlebars', 'utf8'),
+                result = core.partials(source, HB);
             expect(result[0]).to.equal('baz');
             expect(result[1]).to.equal('abcd');
         });
 
         it('partialsdefault', function () {
-            var result = core.partials(fixturesPath + '/testfile.hbs', HB);
+            var source = libfs.readFileSync(fixturesPath + '/testfile.hbs', 'utf8'),
+                result = core.partials(source, HB);
             expect(result.length).to.equal(0);
-        });
-
-        it('compile', function () {
-            var result = core.compile(fixturesPath + '/testfile.hb', null, HB);
-            expect(JSON.stringify(result).substring(1, 9)).to.equal('function');
         });
     });
 

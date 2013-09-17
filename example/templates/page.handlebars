@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+
+    <title>locator-handlebars demo</title>
+
+</head>
+<body>
+
+    <h1>template `bar` rendered at the server side: </h1>
+
+    <div id="barserver">{{{outlet}}}</div>
+
+    <h1>template `bar` rendered at the client side: </h1>
+
+    <div id="barclient">waiting...</div>
+
+    <h1>partial `baz` rendered at the server side: </h1>
+
+    <div id="barclient">{{>baz}}</div>
+    <script src="http://yui.yahooapis.com/3.12.0/build/yui/yui-debug.js"></script>
+    <script src="/static/demo-0.0.1/demo-template-bar.js"></script>
+    <script>
+    // since we use `format` equal to `yui` when creating the plugin
+    // instance, we can use the templates in the client side using
+    // yui as the medium to provision the compiled templates.
+    YUI().use('node', 'demo-template-bar', function (Y) {
+        var barContent = Y.Template.get('demo/bar')({
+            tagline: 'rendering template bar at the client side'
+        });
+        Y.one('#barclient').setHTML(barContent);
+    });
+    </script>
+
+</body>
+</html>
