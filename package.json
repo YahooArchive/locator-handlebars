@@ -7,7 +7,7 @@
     "dependencies": {
         "yui": "3.x"
     },
-    "main": "index",
+    "main": "./lib/plugin.js",
     "keywords": [
         "framework",
         "yui",
