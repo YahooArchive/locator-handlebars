@@ -13,8 +13,7 @@
 var libfs = require('fs'),
     libpath = require('path'),
     expect = require('chai').expect,
-    core = require('../../lib/core.js'),
-    HB = require('yui/handlebars').Handlebars,
+    Plugin = require('../../'),
     fixturesPath = libpath.join(__dirname, '../fixtures');
 
 describe('locator-handlebars', function () {
@@ -23,14 +22,14 @@ describe('locator-handlebars', function () {
 
         it('partials', function () {
             var source = libfs.readFileSync(fixturesPath + '/testfile.handlebars', 'utf8'),
-                result = core.partials(source, HB);
+                result = new Plugin().partialsParser(source);
             expect(result[0]).to.equal('baz');
             expect(result[1]).to.equal('abcd');
         });
 
         it('partialsdefault', function () {
             var source = libfs.readFileSync(fixturesPath + '/testfile.hbs', 'utf8'),
-                result = core.partials(source, HB);
+                result = new Plugin().partialsParser(source);
             expect(result.length).to.equal(0);
         });
     });

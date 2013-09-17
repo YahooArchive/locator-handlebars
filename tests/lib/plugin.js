@@ -13,7 +13,7 @@
 var libpath = require('path'),
     libfs = require('fs'),
     expect = require('chai').expect,
-    plugin = require('../../lib/plugin.js'),
+    Plugin = require('../../'),
     libpromise  = require('yui/promise');
 
 describe('locator-handlebars', function () {
@@ -21,7 +21,8 @@ describe('locator-handlebars', function () {
     describe('plugin', function () {
 
         it('summary', function () {
-            expect(plugin.describe.summary).to.equal('Compile handlebars templates to yui modules');
+            var p = new Plugin();
+            expect(p.describe.summary).to.equal('Handlebars template compiler for locator');
         });
 
         it('fileUpdated', function (next) {
@@ -39,15 +40,15 @@ describe('locator-handlebars', function () {
                 filecall += 1;
                 expect(bundleName).to.equal("testing");
                 expect(relativePath).to.equal("testing-template-testfile.js");
-                expect(contents.substring(0, 54)).to.equal("YUI.add(\"testing-template-testfile\",function(Y, NAME)");
+                expect(contents.substring(0, 53)).to.equal("YUI.add(\"testing-template-testfile\",function(Y, NAME)");
                 return new libpromise.Promise(function (fulfill, reject) {
                     fulfill();
                 });
             };
-            plugin.fileUpdated(evt, api).then(function () {
+            new Plugin({ format: 'yui' }).fileUpdated(evt, api).then(function () {
                 try {
                     expect(1).to.equal(filecall);
-                    expect(evt.bundle.useServerModules[0]).to.equal('testing-template-testfile');
+                    expect(evt.bundle.template['testfile']).to.be.a('function');
                     next();
                 } catch (err) {
                     next(err);
@@ -65,7 +66,7 @@ describe('locator-handlebars', function () {
                 return fn();
             };
             expect(function() {
-                plugin.fileUpdated(evt, api);
+                new Plugin().fileUpdated(evt, api);
             }).to.throw(Error);
         });
     });

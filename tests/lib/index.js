@@ -11,7 +11,7 @@
 
 
 var expect = require('chai').expect,
-    index = require('../../lib/index.js');
+    Plugin = require('../../');
 
 describe('locator-handlebars', function () {
 
@@ -19,43 +19,38 @@ describe('locator-handlebars', function () {
 
         it('extend', function () {
             var a = {
-                foo: 'bar',
-                extensions: 'baz',
-                nameParser: 'test'
+                foo: 'bar'
             },
-            extended = index.yui(a);
-            expect(extended.describe.summary).to.equal('Compile handlebars templates to yui modules');
-            expect(extended.describe.extensions).to.equal('baz');
-            expect(extended.describe.nameParser).to.equal('test');
-            expect(extended.describe.foo).to.equal('bar');
+            extended = new Plugin(a);
+            expect(extended.describe.options.foo).to.equal('bar');
         });
 
         it('extend default instance', function () {
-            var extended = index.yui();
-            expect(extended.describe.summary).to.equal('Compile handlebars templates to yui modules');
+            var extended = new Plugin();
+            expect(extended.describe.summary).to.equal('Handlebars template compiler for locator');
         });
 
-        it('YUI/handlebars applied to index.yui().handlebars by default', function () {
-            var extended = index.yui(),
+        it('YUI/handlebars used by default', function () {
+            var extended = new Plugin(),
 
                 expected = require('yui/handlebars').Handlebars,
-                actual = extended.describe.handlebars;
+                actual = extended.describe.options.handlebars;
 
             expect(actual).is.equal(expected);
         });
 
         it('custom handlebars is used in extended instance', function () {
             var fakeHb = {VERSION:'ohhai'},
-                extended = index.yui({handlebars: fakeHb}),
+                extended = new Plugin({handlebars: fakeHb}),
 
                 expected = 'ohhai',
-                actual = extended.describe.handlebars.VERSION;
+                actual = extended.describe.options.handlebars.VERSION;
 
             expect(actual).to.equal(expected);
         });
 
         it('extensions option default', function () {
-            var extended = index.yui(),
+            var extended = new Plugin(),
 
                 expected = ['hb', 'handlebars', 'hbs'],
                 actual = extended.describe.extensions;
@@ -64,15 +59,6 @@ describe('locator-handlebars', function () {
             expect(actual.length).to.equal(expected.length)
         });
 
-        it('extensions option custom', function () {
-            var extended = index.yui({extensions: ['hb', 'handlebars', 'hbs', 'handleb']}),
-
-                expected = ['hb', 'handlebars', 'hbs', 'handleb'],
-                actual = extended.describe.extensions;
-
-            expect(actual).to.have.members(expected);
-            expect(actual.length).to.equal(expected.length)
-        });
     });
 
 });
