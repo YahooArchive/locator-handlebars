@@ -13,7 +13,7 @@
 var libpath = require('path'),
     libfs = require('fs'),
     expect = require('chai').expect,
-    plugin = require('../../lib/plugin.js'),
+    Plugin = require('../../'),
     libpromise  = require('yui/promise');
 
 describe('locator-handlebars', function () {
@@ -21,7 +21,8 @@ describe('locator-handlebars', function () {
     describe('plugin', function () {
 
         it('summary', function () {
-            expect(plugin.describe.summary).to.equal('Compile handlebars templates to yui modules');
+            var p = new Plugin();
+            expect(p.describe.summary).to.equal('Handlebars template compiler for locator');
         });
 
         it('fileUpdated', function (next) {
@@ -38,16 +39,16 @@ describe('locator-handlebars', function () {
             api.writeFileInBundle =  function (bundleName, relativePath, contents, options) {
                 filecall += 1;
                 expect(bundleName).to.equal("testing");
-                expect(relativePath).to.equal("testing-templates-testfile.js");
-                expect(contents.substring(0, 54)).to.equal("YUI.add(\"testing-templates-testfile\",function(Y, NAME)");
+                expect(relativePath).to.equal("testing-template-testfile.js");
+                expect(contents.substring(0, 53)).to.equal("YUI.add(\"testing-template-testfile\",function(Y, NAME)");
                 return new libpromise.Promise(function (fulfill, reject) {
                     fulfill();
                 });
             };
-            plugin.fileUpdated(evt, api).then(function () {
+            new Plugin({ format: 'yui' }).fileUpdated(evt, api).then(function () {
                 try {
                     expect(1).to.equal(filecall);
-                    expect(evt.bundle.useServerModules[0]).to.equal('testing-templates-testfile');
+                    expect(evt.bundle.template['testfile']).to.be.a('function');
                     next();
                 } catch (err) {
                     next(err);
@@ -55,37 +56,18 @@ describe('locator-handlebars', function () {
             }, next);
         });
 
-        it('fileUpdated if file not exists', function (next) {
-            var file = { bundleName: 'testing' },
+        it('fileUpdated if file is an invalid template', function () {
+            var file = { bundleName: 'testing', relativePath: '../fixtures/invalid.handlebars' },
                 bundle = { name: 'testing' },
                 evt = { file: file, bundle: bundle },
-                api = {},
-                filecall = 0;
-            file.fullPath = libpath.join(__dirname, '../fixtures/testnofile.handlebars');
+                api = {};
+            file.fullPath = libpath.join(__dirname, file.relativePath);
             api.promise = function (fn) {
-                return new libpromise.Promise(fn);
+                return fn();
             };
-            api.writeFileInBundle =  function (bundleName, relativePath, contents, options) {
-                filecall += 1;
-                return new libpromise.Promise(function (fulfill, reject) {
-                    fulfill();
-                });
-            };
-            plugin.fileUpdated(evt, api).then(function () {
-                try {
-                    expect(filecall).to.equal(0);
-                    next();
-                } catch (e) {
-                    next(e);
-                }
-            }, function (err) {
-                try {
-                    expect(err.message.substring(0, 33)).to.equal("ENOENT, no such file or directory");
-                    next();
-                } catch (e) {
-                    next(e);
-                }
-            }, next);
+            expect(function() {
+                new Plugin().fileUpdated(evt, api);
+            }).to.throw(Error);
         });
     });
 

@@ -1,13 +1,14 @@
 {
     "name": "locator-handlebars",
     "description": "Handlebars template compiler for locator",
+    "version": "0.3.0",
     "version": "0.2.4",
     "author": "Caridy Patino <caridy@yahoo-inc.com> (http://github.com/caridy)",
     "contributors": [],
     "dependencies": {
         "yui": ">=3.12.0"
     },
-    "main": "index",
+    "main": "./lib/plugin.js",
     "keywords": [
         "framework",
         "yui",
@@ -36,6 +37,7 @@
     },
     "scripts": {
         "lint": "node node_modules/.bin/jshint --config ./node_modules/yui-lint/jshint.json ./lib/*.js",
+        "pretest": "npm run lint",
         "test": "node node_modules/.bin/_mocha tests/lib/*.js --reporter spec"
     },
     "repository": {

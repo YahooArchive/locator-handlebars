@@ -6,9 +6,7 @@
     "main": "app.js",
     "dependencies": {
         "express": "*",
-        "express-yui": "*",
-        "locator": "*",
-        "locator-handlebars": "*",
-        "yui": "~3.11.0"
+        "express-view": "*",
+        "locator": "*"
     }
 }
