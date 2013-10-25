@@ -37,6 +37,7 @@
     },
     "scripts": {
         "lint": "node node_modules/.bin/jshint --config ./node_modules/yui-lint/jshint.json ./lib/*.js",
+        "pretest": "npm run lint",
         "test": "node node_modules/.bin/_mocha tests/lib/*.js --reporter spec"
     },
     "repository": {
