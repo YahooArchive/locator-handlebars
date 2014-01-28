@@ -4,6 +4,11 @@ Locator Handlebars Change History
 @NEXT@
 ------------------
 
+0.3.1 (2014-01-28)
+------------------
+
+* PR #15: Walk conditional branches for partials.
+
 0.3.0 (2013-10-25)
 ------------------
 
