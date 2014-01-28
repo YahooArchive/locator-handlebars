@@ -25,6 +25,7 @@ describe('locator-handlebars', function () {
                 result = new Plugin().partialsParser(source);
             expect(result[0]).to.equal('baz');
             expect(result[1]).to.equal('abcd');
+            expect(result[2]).to.equal('efgh');
         });
 
         it('partialsdefault', function () {
