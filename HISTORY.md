@@ -4,6 +4,11 @@ Locator Handlebars Change History
 @NEXT@
 ------------------
 
+0.3.2 (2014-01-30)
+------------------
+
+* PR #16: adding support for handblebars data to be propagated into the compiled function. This helps with the Intl integration.
+
 0.3.1 (2014-01-28)
 ------------------
 
