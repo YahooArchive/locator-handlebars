@@ -1,5 +1,5 @@
 {
-    "name": "locator-handlebars",
+    "name": "zlocator-handlebars",
     "description": "Handlebars template compiler for locator",
     "version": "0.3.2",
     "author": "Caridy Patino <caridy@yahoo-inc.com> (http://github.com/caridy)",
